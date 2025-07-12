@@ -2,7 +2,7 @@
 
 A **production-ready** Retrieval-Augmented Generation (RAG) system built with **FastAPI**, **LangChain**, and **Gemini/Groq/Mistral**. This project supports seamless deployment with **Docker** and **AWS**, making it a robust foundation for enterprise-grade GenAI applications.
 
-![GitHub last commit](https://img.shields.io/github/last-commit/rag-fastapi-docker-aws)
+![GitHub last commit](https://img.shields.io/github/last-commit/khanfawaz/rag-fastapi-docker-aws)
 ![Python](https://img.shields.io/badge/Python-3.10+-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
 ![LangChain](https://img.shields.io/badge/LangChain-Enabled-orange)
