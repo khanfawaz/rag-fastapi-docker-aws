@@ -24,9 +24,10 @@ A **production-ready** Retrieval-Augmented Generation (RAG) system built with **
 
 ## 📁 Project Structure
 
+```text
 RAG FastAPI Docker AWS/
-├── .git
-├── venv
+├── .git/
+├── venv/
 ├── .env
 ├── .gitignore
 ├── main.py
