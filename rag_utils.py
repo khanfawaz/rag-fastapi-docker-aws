@@ -40,3 +40,14 @@ def ingest_documents():
     vectordb = Chroma.from_documents(chunks, embedding=embeddings, persist_directory=CHROMA_DB_DIR)
     vectordb.persist()
     return f"Ingested {len(chunks)} chunks into vector DB."
+
+from langchain_community.vectorstores import Chroma
+from langchain_core.documents import Document
+
+def get_relevant_documents(query: str, k: int = 5) -> list[Document]:
+    embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+    vectordb = Chroma(persist_directory=CHROMA_DB_DIR, embedding_function=embeddings)
+    return vectordb.similarity_search(query, k=k)
+
+def format_context(docs: list[Document]) -> str:
+    return "\n\n---\n\n".join(doc.page_content for doc in docs)

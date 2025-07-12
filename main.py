@@ -41,19 +41,38 @@ class QueryRequest(BaseModel):
     query: str
 
 # Chat endpoint
+from rag_utils import get_relevant_documents, format_context
 @app.post("/query")
 async def chat(request: QueryRequest):
-    completion = client.chat.completions.create(
-        model="llama-3.3-70b-versatile",
-        messages=[
-            {"role": "user", "content": request.query}
-        ],
-        temperature=1,
-        max_completion_tokens=1024,
-        top_p=1,
-        stream=False,
-    )
-    return {"response": completion.choices[0].message.content}
+    query = request.query
+    try:
+        docs = get_relevant_documents(query)
+        context = format_context(docs)
+
+        prompt = f"""Answer the question using the below context:\n\n{context}\n\nQuestion: {query}\nAnswer:"""
+
+        completion = client.chat.completions.create(
+            model="llama-3.3-70b-versatile",
+            messages=[
+                {"role": "user", "content": prompt}
+            ],
+            temperature=0.7,
+            max_completion_tokens=1024,
+            top_p=1,
+            stream=False,
+        )
+
+        return {
+            "query": query,
+            "chunks_used": len(docs),
+            "response": completion.choices[0].message.content
+        }
+    except Exception as e:
+        import traceback
+        return {
+            "error": str(e),
+            "trace": traceback.format_exc()
+        }
 
 # Load utility
 from rag_utils import get_api_key
