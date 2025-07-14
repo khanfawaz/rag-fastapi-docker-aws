@@ -62,8 +62,6 @@ docker run -it --rm \
   groq-rag-app
 ```
 
-> 💡 Use `^` instead of `\` for Windows PowerShell.
-
 ---
 
 ## ⚙️ How It Works
@@ -121,8 +119,6 @@ docker run -it --rm \
 ```env
 GROQ_API_KEY=groq_api_key_here
 ```
-
-> ⚠️ **Never commit `.env` files.** Your API keys are sensitive. Always use `.gitignore`.
 
 ---
 
