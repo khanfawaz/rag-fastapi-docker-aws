@@ -3,6 +3,7 @@ from pydantic import BaseModel
 from groq import Groq
 from dotenv import load_dotenv
 import os
+from fastapi.middleware.cors import CORSMiddleware
 
 # Load environment
 load_dotenv()
@@ -13,6 +14,15 @@ client = Groq(api_key=api_key)
 
 # FastAPI app
 app = FastAPI()
+
+# Allow all origins (for now – restrict later)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Can change to your specific IP/domain later
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse

@@ -2,6 +2,9 @@
 venv/
 .env
 
+# AWS Key
+AWS_KEY_PAIR.pem
+
 # Python cache
 __pycache__/
 *.py[cod]

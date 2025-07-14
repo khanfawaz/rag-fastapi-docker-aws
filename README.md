@@ -1,6 +1,6 @@
 # 🚀 RAG FastAPI Docker AWS
 
-A **production-ready** Retrieval-Augmented Generation (RAG) system built with **FastAPI**, **LangChain**, and **Groq**. This project supports seamless deployment with **Docker** and **AWS**, making it a robust foundation for enterprise-grade GenAI applications.
+A production-grade Retrieval-Augmented Generation (RAG) system powered by **LangChain**, **ChromaDB** and **Groq**. **FastAPI** provides a clean API layer for external access. The system is containerized with **Docker** and deployable on **AWS**, offering a scalable and modular foundation for enterprise-level GenAI applications.
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/khanfawaz/rag-fastapi-docker-aws)
 ![Python](https://img.shields.io/badge/Python-3.10+-blue)
@@ -9,7 +9,7 @@ A **production-ready** Retrieval-Augmented Generation (RAG) system built with **
 
 ---
 
-## 🔧 Features
+## 🔧 Project Features
 
 * 🧠 **LLM Integration** (Groq using LLaMA3-70B)
 * 🔍 **Hybrid RAG Pipeline** (ChromaDB-powered vectorstore)
@@ -21,20 +21,28 @@ A **production-ready** Retrieval-Augmented Generation (RAG) system built with **
 
 ---
 
-## 📁 Project Structure
+## 🧱 Project Structure
 
 ```text
-RAG FastAPI Docker AWS/
-├── chroma_db/               # Vector DB directory
-├── data/                    # Documents to ingest (PDF, DOCX, etc.)
-├── main.py                  # FastAPI app
-├── rag_utils.py             # Ingestion, chunking, embedding helpers
-├── .env                     # Contains GROQ_API_KEY
-├── .gitignore               # Prevents secrets and venv from being committed
-├── Dockerfile               # Container specification
-├── requirements.txt         # All dependencies
-├── README.md                # You're reading this
-└── venv/                    # Local Python environment (ignored)
+rag-fastapi-docker-aws/
+├── app/
+│   ├── main.py               # FastAPI app with /query endpoint
+│   ├── rag_pipeline.py       # Core RAG logic
+│   ├── utils.py              # Text splitter, file reader, etc.
+│   ├── vector_store.py       # Chroma DB setup and search
+│   └── config.py             # Load env vars and API keys
+│
+├── data/                     # Uploaded source documents
+├── chroma_db/                # Persisted vector DB
+│
+├── .env                      # Secret API keys (e.g., GROQ_API_KEY)
+├── Dockerfile                # Build the production image
+├── requirements.txt          # Python dependencies
+├── docker-compose.yml        # (optional) Multi-container setup
+├── AWS_KEY_PAIR.pem          # SSH key for EC2 (not checked into Git)
+├── .github/workflows/        # GitHub Actions CI/CD workflows
+├── README.md                 # You are here
+└── .dockerignore             # Avoid copying large/unnecessary files
 ```
 
 ---
@@ -111,28 +119,42 @@ docker run -it --rm \
 ## 🔐 .env File Example
 
 ```env
-GROQ_API_KEY=your_groq_api_key_here
+GROQ_API_KEY=groq_api_key_here
 ```
 
 > ⚠️ **Never commit `.env` files.** Your API keys are sensitive. Always use `.gitignore`.
 
 ---
 
-## ✅ Status
+## Deployment Checklist
 
-* [x] Phase 1: Groq LLM API Setup
-* [x] Phase 2: FastAPI Backend
-* [x] Phase 3: Document Ingestion & Chunking
-* [x] Phase 4: Vector DB (Chroma)
-* [x] Phase 5: Query Endpoint with RAG
-* [x] Phase 6: Dockerization
-* [ ] Phase 7: AWS EC2 Deployment
+Task                                  Status
+
+RAG pipeline working locally            ✅
+
+FastAPI API implemented                 ✅
+
+Dockerfile created                      ✅
+
+Tested locally with Docker              ✅
+
+Docker image pushed to DockerHub        ✅
+
+EC2 instance running with open ports    ✅
+
+Docker installed on EC2                 ✅
+
+Image pulled on EC2                     ✅
+
+.env created and mounted                ✅
+
+RAG API accessible via public IP        ✅
 
 ---
 
 ## 🤝 Contributing
 
-PRs and feedback are welcome! Feel free to fork and build on this.
+All feedback are welcome!
 
 ---
 
