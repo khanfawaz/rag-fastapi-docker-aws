@@ -117,7 +117,7 @@ docker run -it --rm \
 ## 🔐 .env File Example
 
 ```env
-GROQ_API_KEY=groq_api_key_here
+GROQ_API_KEY=groq_api_key
 ```
 
 ---
